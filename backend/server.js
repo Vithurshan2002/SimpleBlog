@@ -6,7 +6,7 @@ const app=express();
 app.use(bp.urlencoded({extended:true}));
 app.use(express.json());
 const postRoute=require('./routes/post');
-app.use(postRoute);
+app.use('/api',postRoute);
 app.listen(process.env.PORT||3000,()=>{
     console.log(`server is Listning in the port ${process.env.PORT}`)
 });
