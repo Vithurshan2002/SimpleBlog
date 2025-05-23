@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/post");
-const { useParams } = require("react-router-dom");
 
 //get all posts
 router.get("/posts", async (req, res) => {
