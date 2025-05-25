@@ -9,8 +9,9 @@ const postSchema=new mongoose.Schema({
         required:true
     },
     category:{
-        type:String,
-        default:Date.now
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"category",
+        required:true,
     },
     author:{
         type:String,
