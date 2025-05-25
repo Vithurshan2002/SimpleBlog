@@ -1,9 +1,10 @@
 import React from "react";
-import{NavLink} from 'react-router-dom';
+import{NavLink, useNavigate} from 'react-router-dom';
 const Navbar = () => {
+  const navigate=useNavigate();
   return (
     <div className="flex flex-col md:flex-row  bg-black text-white justify-around items-center py-2">
-      <h1 className="text-2xl font-bold">MY BLOG</h1>
+      <h1 className="text-2xl font-bold hover:cursor-pointer" onClick={()=>{navigate('/')}}>MY BLOG</h1>
       <ul className="flex md:gap-4 gap-10 font-semibold">
         <li>
         <NavLink to='/' className="hover:underline">Home</NavLink>

@@ -5,18 +5,20 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Posts from "./Pages/Posts";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import Postdetails from "./Pages/Postdetails";
 function App() {
   return (
     <>
       <BrowserRouter>
-      <Navbar/>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/posts/:id" element={<Postdetails />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     </>
   );
