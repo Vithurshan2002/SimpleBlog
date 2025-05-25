@@ -2,7 +2,9 @@ require('dotenv').config();
 const express=require('express');
 const mongoose=require('mongoose');
 const bp=require('body-parser');
+const cors=require('cors');
 const app=express();
+app.use(cors());
 app.use(bp.urlencoded({extended:true}));
 app.use(express.json());
 const postRoute=require('./routes/post');
@@ -19,3 +21,4 @@ mongoose.connect('mongodb://localhost:27017/MYBLOG')
     console.log("error in connecting to mongoDB");
     console.log(err);
 });
+

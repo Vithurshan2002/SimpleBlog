@@ -1,34 +1,34 @@
 import React from "react";
-
+import PostList from "./PostList";
+import { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 const Home = () => {
+  const [posts, setposts] = useState([]);
+
+  const getPosts = () => {
+    axios.get('http://localhost:8000/api/posts').then((posts)=>{
+      setposts(posts.data);
+      console.log(posts.data);
+    }).catch((error)=>{
+        console.log(error.message)
+    })
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
     <div className="pt-5 flex flex-col md:flex-row px-10 gap-10">
-      <div className="flex-1">
+      <div className="flex-1 ">
         <h1 className="font-bold text-4xl">Latest Posts</h1>
-        <div className="flex border my-5">
-          <div className="w-25 h-25 bg-gray-300"></div>
-          <div className="ps-5">
-            <h1 className="font-semibold">Post Title 1</h1>
-            <p className="py-1">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </p>
-            <button className="bg-blue-500 px-1.5 font-bold rounded-full text-white hover:cursor-pointer hover:text-green-700  ">
-              Read More
-            </button>
-          </div>
-        </div>
-        <div className="flex border my-5">
-          <div className="w-25 h-25 bg-gray-300"></div>
-          <div className="ps-5">
-            <h1 className="font-semibold">Post Title 1</h1>
-            <p className="py-1">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </p>
-            <button className="bg-blue-500 px-1.5 font-bold rounded-full text-white hover:cursor-pointer hover:bg-blue-300 hover:text-green-700  ">
-              Read More
-            </button>
-          </div>
-        </div>
+        {
+          posts.map((post,key)=>{
+            return  <PostList key={key} data={post}/>
+          })
+        }
+       
       </div>
 
       <div className="flex-1">
@@ -42,13 +42,19 @@ const Home = () => {
         <div className="border mt-10 p-3 mb-20 ">
           <h1 className="font-semibold py-2 text-xl">Categories</h1>
           <p className="py-2">
-            <a href="" className="hover:underline ">Category 1</a>
+            <a href="" className="hover:underline ">
+              Category 1
+            </a>
           </p>
           <p className="py-2">
-            <a href="" className="hover:underline">Category 2</a>
+            <a href="" className="hover:underline">
+              Category 2
+            </a>
           </p>
           <p className="py-2">
-            <a href="" className="hover:underline">Category 3</a>
+            <a href="" className="hover:underline">
+              Category 3
+            </a>
           </p>
         </div>
       </div>

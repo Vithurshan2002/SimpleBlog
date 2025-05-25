@@ -17,12 +17,12 @@ router.get("/post/:id", async (req, res) => {
   try {
     const data = await Post.findById(req.params.id);
     if (data) {
-      res.status(200).json(data);
+      res.status(200).json({"data":data});
     } else {
       return res.status(404).json({ message: "NotFound" });
     }
   } catch (error) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -37,9 +37,9 @@ router.post("/addpost", async (req, res) => {
       author: author,
       image: image,
     });
-    res.json(200).json({ data });
+    res.status(200).json({ "messgae":data });
   } catch (error) {
-    res.json(400).json({ message: "Cannot Store the data" });
+    res.status(400).json({ "message": "Cannot Store the data" });
   }
 });
 
@@ -55,13 +55,13 @@ router.put("/post/:id", async (req, res) => {
     data.category=req.body.category || data.category;
     data.author=req.body.author || data.author;
     data.image=req.body.image || data.image;
-    data.updatedAt=DATE.now();
+    data.updatedAt=Date.now();
 
-    const updateddata=await post.save();
-    res.json(200).json(updateddata);
+    const updateddata=await data.save();
+    res.status(200).json({"data":updateddata});
 
   } catch (error) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -76,7 +76,7 @@ router.delete("/post/:id", async (req, res) => {
     res.status(200).json({'message':"post is deleted"})
 
   } catch (error) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ "message": error.message });
   }
 });
 
