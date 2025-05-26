@@ -3,6 +3,7 @@ import PostList from "./PostList";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [posts, setposts] = useState([]);
@@ -24,8 +25,8 @@ const Home = () => {
     axios
       .get("http://localhost:8000/maincategory/category")
       .then((category) => {
-        setcategories(category.data);
-        console.log(category.data);
+        setcategories(category.data.message);
+        console.log(category.data.message);
       })
       .catch((error) => {
         console.log(error.message);
@@ -56,13 +57,11 @@ const Home = () => {
         </div>
         <div className="border mt-10 p-3 mb-20 ">
           <h1 className="font-semibold py-2 text-xl">Categories</h1>
-          <p className="py-2">
-            {categories.map((category) => (
-              <a href="#" className="hover:underline">
-                {category.name}
-              </a>
-            ))}
-          </p>
+            {
+              categories.map((data,key)=>{
+                  return <li className='list-none' key={key}><Link to={`/posts/Category/${data._id}`} className="text-blue-500 font-semibold hover:underline">{data.name}</Link></li>
+              })
+            }
         </div>
       </div>
     </div>
